@@ -1,21 +1,5 @@
 # Missle Command Game
 
-## basic game action
-+ register mouse clicks
-
-
-* generate random ememy missles
-* increase speed of enemy missles
-* track defense missles
-* track offense missles
-* track explotion of defense missles
-** cross with offense missles
-* destruction of missle sites
-
-## basic game graphics
-+ render buldings for cities and rocket silos
-- draw missles  
-
 <img src="missle_command.png"/>
 
 ## for MacOS
@@ -58,12 +42,12 @@ Install sdl2_image.
 
 
 ## Icons Used
-drowning.png - <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a></div>
-
 
 # Inital starter code from - CPPND: Capstone Snake Game Example
 
 [repo](https://github.com/udacity/CppND-Capstone-Snake-Game)
 
 This is a starter repo for the Capstone project in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). The code for this repo was inspired by [this](https://codereview.stackexchange.com/questions/212296/snake-game-in-c-with-sdl) excellent StackOverflow post and set of responses.
+
+
 

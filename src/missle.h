@@ -1,6 +1,13 @@
 #ifndef MISSLE_H
 #define MISSLE_H
 
+enum MissleState { 
+  Falling, 
+  Exploding, 
+  Imploding, 
+  Done 
+};
+
 class Missle {
   public:
 		
@@ -8,25 +15,50 @@ class Missle {
       id = _idCnt++;
     }
 
-    Missle(float x, float y) : _posX(x), _posY(y) {
-      id = _idCnt++;
+    void setMissleVector(float x, float y, float gx, float gy);
+
+    void getMissleVector(float &startx, float &starty, float &posx, float &posy);
+    
+    void Update();
+
+    float getExplosionRadius() {
+      return _explosionRadius;
     }
 
-    void getPosition(float &x, float &y);
-    
+    MissleState getState() {
+      return _state;
+    }
 
-    bool selected = true;
     int id;
 
   protected:
+    
+    MissleState _state = MissleState::Falling;
 
-  	float speed{0.03f};
+  	float speed{2.0f};
+
+    float _startX = 0.0f;
+    float _startY = 0.0f;
 
     float _posX = 0.0f;
     float _posY = 0.0f;
+
+    float _goalX = 0.0f;
+    float _goalY = 0.0f;
     
-    private:
-      static int _idCnt; // global variable for counting object ids
+    float stepNumber = 0.0f;
+    float stepsToGoal = 0.0f;
+
+    float percentPerStep = 0.0f;
+
+    float _dx = 0.0f;
+    float _dy = 0.0f;
+
+    float _explosionRadius = 0.0f;
+
+  private:
+          
+    static int _idCnt; // global variable for counting object ids
 
 };
 

@@ -9,15 +9,15 @@
 class Controller {
  public:
 
-  Controller(const std::size_t block_width, const std::size_t block_height) : block_width(block_width),
-      block_height(block_height) {};
+  Controller(const std::size_t screen_width, const std::size_t screen_height) : screen_width(screen_width),
+      screen_height(screen_height) {};
 
-  void HandleInput(bool &running, std::vector<std::shared_ptr<Missle>> &offenseMissles);
+  void HandleInput(bool &running, std::vector<std::shared_ptr<Missle>> &defenseMissles);
 
  private:
   
-  const std::size_t block_width;
-  const std::size_t block_height;
+  const std::size_t screen_width;
+  const std::size_t screen_height;
 
 };
 

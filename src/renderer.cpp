@@ -42,7 +42,10 @@ Renderer::~Renderer() {
   SDL_Quit();
 }
 
-void Renderer::Render(std::vector<std::shared_ptr<City>> &cities, std::vector<std::shared_ptr<Silo>> &silos) {
+void Renderer::Render(std::vector<std::shared_ptr<City>> &cities, 
+                      std::vector<std::shared_ptr<Silo>> &silos,  
+                      std::vector<std::shared_ptr<Missle>> &offenseMissles,  
+                      std::vector<std::shared_ptr<Missle>> &defenseMissles) {
 
   SDL_Rect block;
   block.w = screen_width / grid_width;
@@ -58,12 +61,11 @@ void Renderer::Render(std::vector<std::shared_ptr<City>> &cities, std::vector<st
   SDL_SetRenderDrawColor(sdl_renderer, 0xF0, 0xD9, 0x9A, 0xFF);
   background.x = 0;
   background.w = screen_width;
-  background.y = y_water_sand_divide;
+  background.y = screen_height - 10;
   background.h = screen_height;
   SDL_RenderFillRect(sdl_renderer, &background);
   
   // render Cities
-  
   std::for_each(cities.begin(), cities.end(), [&](std::shared_ptr<City> &city) {
     RenderCity(city);
   });
@@ -73,6 +75,16 @@ void Renderer::Render(std::vector<std::shared_ptr<City>> &cities, std::vector<st
     RenderSilo(silo);
   });
   
+  // render Offense Missles
+  std::for_each(offenseMissles.begin(), offenseMissles.end(), [&](std::shared_ptr<Missle> &offense) {
+    RenderOffenseMissle(offense);
+  });
+
+  // render Defensive Missles
+  std::for_each(defenseMissles.begin(), defenseMissles.end(), [&](std::shared_ptr<Missle> &defense) {
+    RenderDefenseMissle(defense);
+  });
+
   // Update Screen
   SDL_RenderPresent(sdl_renderer);
 }
@@ -116,6 +128,42 @@ void Renderer::RenderSilo(std::shared_ptr<Silo> &silo) {
   SDL_RenderFillRect(sdl_renderer, &block);
   
 }
+
+void Renderer::RenderOffenseMissle(std::shared_ptr<Missle> &offenseMissle) {
+
+  if (offenseMissle->getState() != MissleState::Falling) {
+    SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);  //red
+  
+  } else {
+    SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xFF, 0xFF, 0xFF);  //white
+  }
+
+  float startx, starty, px, py;
+  offenseMissle->getMissleVector(startx, starty, px, py);
+
+  SDL_RenderDrawLine(sdl_renderer, startx, starty, px, py);
+    
+  float radius = offenseMissle->getExplosionRadius();
+
+  if (offenseMissle->getState() == MissleState::Exploding 
+     || offenseMissle->getState() == MissleState::Imploding) {
+    // draw explosion / implosion
+
+    // center exploser over hit point
+    SDL_Rect block;
+    block.x = px - radius;
+    block.y = py - radius;
+    block.w = radius * 2;
+    block.h = radius * 2;
+    SDL_RenderFillRect(sdl_renderer, &block);
+
+  }
+}
+
+void Renderer::RenderDefenseMissle(std::shared_ptr<Missle> &defenseMissle) {
+
+}
+
 
 void Renderer::UpdateWindowTitle(int score, int fps) {
   std::string title{"Snake Score: " + std::to_string(score) + " FPS: " + std::to_string(fps)};

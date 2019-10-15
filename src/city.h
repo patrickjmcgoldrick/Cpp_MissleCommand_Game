@@ -23,7 +23,7 @@ class City {
     float _posX = 0.0f;
     float _posY = 0.0f;
     float _width = 40.0f;
-    float _hight = 10.0f;
+    float _hight = 15.0f;
     
     bool _active = true;
 

@@ -17,12 +17,18 @@ class Renderer {
            const std::size_t grid_width, const std::size_t grid_height);
   ~Renderer();
 
-  void Render(std::vector<std::shared_ptr<City>> &cities, std::vector<std::shared_ptr<Silo>> &silos);
+  void Render(std::vector<std::shared_ptr<City>> &cities, 
+              std::vector<std::shared_ptr<Silo>> &silos,
+              std::vector<std::shared_ptr<Missle>> &offenseMissles,  
+              std::vector<std::shared_ptr<Missle>> &defenseMissles);
+              
   void UpdateWindowTitle(int score, int fps);
 
  private:
   void RenderCity(std::shared_ptr<City> &city);
   void RenderSilo(std::shared_ptr<Silo> &silo);
+  void RenderOffenseMissle(std::shared_ptr<Missle> &offenseMissle);
+  void RenderDefenseMissle(std::shared_ptr<Missle> &defenseMissle);
 
   SDL_Window *sdl_window;
   SDL_Renderer *sdl_renderer;

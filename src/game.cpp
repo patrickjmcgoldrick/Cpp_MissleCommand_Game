@@ -3,10 +3,10 @@
 #include <algorithm>
 #include "SDL.h"
 
-Game::Game(std::size_t grid_width, std::size_t grid_height)
+Game::Game(std::size_t game_width, std::size_t game_height)
     : engine(dev()),
-      random_w(0, static_cast<int>(grid_width)),
-      random_h(0, static_cast<int>(grid_height)) {
+      random_start_x(0, static_cast<int>(game_width)),
+      random_goal_x (0, static_cast<int>(game_width)) {
 
   
   // create ground objects
@@ -37,6 +37,12 @@ Game::Game(std::size_t grid_width, std::size_t grid_height)
   cities.at(4)->setPosition(450, 620); // right
   cities.at(5)->setPosition(500, 620); // right
 
+  // create initial offense missle
+  float startx = (float)random_start_x(engine);
+  float goalx = (float)random_goal_x(engine);
+  offenseMissles.push_back(std::make_shared<Missle>());
+  offenseMissles.at(0)->setMissleVector(startx, 0.0f, goalx, 625.0f);
+
 }
 
 void Game::Run(Controller &controller, Renderer &renderer,
@@ -54,7 +60,7 @@ void Game::Run(Controller &controller, Renderer &renderer,
     // Input, Update, Render - the main game loop.
     controller.HandleInput(running, offenseMissles);
     Update();
-    renderer.Render(cities, silos);
+    renderer.Render(cities, silos, offenseMissles, defenseMissles);
 
     frame_end = SDL_GetTicks();
 
@@ -82,18 +88,11 @@ void Game::Run(Controller &controller, Renderer &renderer,
 
 void Game::Update() {
 
-
-/*
-  // move Patrons
-  for (Patron &patron : patrons) {
-    patron.Update();
-  }
-
-  // move Lifeguards
-  std::for_each(lifeguards.begin(), lifeguards.end(), [](std::shared_ptr<Lifeguard> &lifeguard) {
-    lifeguard->Update();
+  // move offense missles
+  std::for_each(offenseMissles.begin(), offenseMissles.end(), [](std::shared_ptr<Missle> &missle) {
+    missle->Update();
   });
-*/
+
 
   
 }

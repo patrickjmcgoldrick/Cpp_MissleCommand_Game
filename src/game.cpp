@@ -5,8 +5,8 @@
 
 Game::Game(std::size_t game_width, std::size_t game_height)
     : engine(dev()),
-      random_start_x(0, static_cast<int>(game_width)),
-      random_goal_x (0, static_cast<int>(game_width)) {
+      random_game_width(0, static_cast<int>(game_width)),
+      random_missle_count (0, static_cast<int>(4)) {
 
   
   // create ground objects
@@ -37,11 +37,17 @@ Game::Game(std::size_t game_width, std::size_t game_height)
   cities.at(4)->setPosition(450, 620); // right
   cities.at(5)->setPosition(500, 620); // right
 
-  // create initial offense missle
-  float startx = (float)random_start_x(engine);
-  float goalx = (float)random_goal_x(engine);
-  offenseMissles.push_back(std::make_shared<Missle>());
-  offenseMissles.at(0)->setMissleVector(startx, 0.0f, goalx, 625.0f);
+}
+
+void Game::AddNewOffenseMissle() {
+
+  // create offense missle
+  float startx = (float)random_game_width(engine);  // random start
+  float goalx = (float)random_game_width(engine);   // random target
+
+  std::shared_ptr<Missle> missle = std::make_shared<Missle>();
+  missle->setMissleVector(startx, 0.0f, goalx, 625.0f);
+  offenseMissles.push_back(missle);
 
 }
 
@@ -58,7 +64,7 @@ void Game::Run(Controller &controller, Renderer &renderer,
     frame_start = SDL_GetTicks();
 
     // Input, Update, Render - the main game loop.
-    controller.HandleInput(running, offenseMissles);
+    controller.HandleInput(running, defenseMissles);
     Update();
     renderer.Render(cities, silos, offenseMissles, defenseMissles);
 
@@ -74,6 +80,12 @@ void Game::Run(Controller &controller, Renderer &renderer,
       renderer.UpdateWindowTitle(score, frame_count);
       frame_count = 0;
       title_timestamp = frame_end;
+
+      int numNewMissles = random_missle_count(engine);
+      std::cout << "# Missles: " << numNewMissles << "\n";
+      for (int i=0; i<numNewMissles; i++) {
+        AddNewOffenseMissle();
+      }
     }
 
     // If the time for this frame is too small (i.e. frame_duration is

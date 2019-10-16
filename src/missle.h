@@ -35,7 +35,7 @@ class Missle {
     
     MissleState _state = MissleState::Falling;
 
-  	float speed{2.0f};
+  	float speed{1.5f};
 
     float _startX = 0.0f;
     float _startY = 0.0f;

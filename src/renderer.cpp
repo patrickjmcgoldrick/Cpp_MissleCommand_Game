@@ -149,14 +149,11 @@ void Renderer::RenderOffenseMissle(std::shared_ptr<Missle> &offenseMissle) {
      || offenseMissle->getState() == MissleState::Imploding) {
     // draw explosion / implosion
 
-    // center exploser over hit point
-    SDL_Rect block;
-    block.x = px - radius;
-    block.y = py - radius;
-    block.w = radius * 2;
-    block.h = radius * 2;
-    SDL_RenderFillRect(sdl_renderer, &block);
-
+    // center explosion over hit point
+    DrawCircle(sdl_renderer, px, py, radius);
+    DrawCircle(sdl_renderer, px, py, (radius * 3.0 / 4.0));
+    DrawCircle(sdl_renderer, px, py, (radius / 2.0));
+    DrawCircle(sdl_renderer, px, py, (radius / 4));
   }
 }
 
@@ -164,6 +161,46 @@ void Renderer::RenderDefenseMissle(std::shared_ptr<Missle> &defenseMissle) {
 
 }
 
+/**
+ * Draw circle from: https://stackoverflow.com/questions/38334081/howto-draw-circles-arcs-and-vector-graphics-in-sdl
+ */
+void Renderer::DrawCircle(SDL_Renderer * renderer, int32_t centreX, int32_t centreY, int32_t radius)
+{
+   const int32_t diameter = (radius * 2);
+
+   int32_t x = (radius - 1);
+   int32_t y = 0;
+   int32_t tx = 1;
+   int32_t ty = 1;
+   int32_t error = (tx - diameter);
+
+   while (x >= y)
+   {
+      //  Each of the following renders an octant of the circle
+      SDL_RenderDrawPoint(renderer, centreX + x, centreY - y);
+      SDL_RenderDrawPoint(renderer, centreX + x, centreY + y);
+      SDL_RenderDrawPoint(renderer, centreX - x, centreY - y);
+      SDL_RenderDrawPoint(renderer, centreX - x, centreY + y);
+      SDL_RenderDrawPoint(renderer, centreX + y, centreY - x);
+      SDL_RenderDrawPoint(renderer, centreX + y, centreY + x);
+      SDL_RenderDrawPoint(renderer, centreX - y, centreY - x);
+      SDL_RenderDrawPoint(renderer, centreX - y, centreY + x);
+
+      if (error <= 0)
+      {
+         ++y;
+         error += ty;
+         ty += 2;
+      }
+
+      if (error > 0)
+      {
+         --x;
+         tx += 2;
+         error += (tx - diameter);
+      }
+   }
+}
 
 void Renderer::UpdateWindowTitle(int score, int fps) {
   std::string title{"Snake Score: " + std::to_string(score) + " FPS: " + std::to_string(fps)};

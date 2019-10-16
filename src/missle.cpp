@@ -5,6 +5,9 @@
 // init static variable
 int Missle::_idCnt = 0;
 
+/**
+ * Set initial line position / length properties.
+ */
 void Missle::setMissleVector(float x, float y, float gx, float gy) {
   
   _startX = x;
@@ -28,6 +31,9 @@ void Missle::setMissleVector(float x, float y, float gx, float gy) {
   //std::cout << "Steps to goal: " << stepsToGoal << "\n";
 }
 
+/**
+ * Return the current line position / length properties.
+ */
 void Missle::getMissleVector(float &startx, float &starty, float &posx, float &posy) {
   startx = _startX;
   starty = _startY;
@@ -35,13 +41,15 @@ void Missle::getMissleVector(float &startx, float &starty, float &posx, float &p
   posy = _posY;
 }
 
+/**
+ * Adjust the position / shape of missle during one time tick interval
+ */
 void Missle::Update() {
   
   if (_state == MissleState::Done) {
     return;
   }
 
-  
   if (_state == MissleState::Exploding) { 
     _explosionRadius += 0.4;
   } else if (_state == MissleState::Imploding) {
@@ -52,12 +60,16 @@ void Missle::Update() {
   std::cout << "state: " << _state << "\n";
   */
   // test for state transition
-  if (_explosionRadius >= 16.0) {
+  if (_explosionRadius >= 20.0) {
+  
     _state = MissleState::Imploding;
     return;
+  
   } else if (_explosionRadius < 0.0) {
+  
     _state = MissleState::Done;
     return;
+
   } else if (_state == MissleState::Falling) {
   
     stepNumber += 1;

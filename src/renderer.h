@@ -30,6 +30,8 @@ class Renderer {
   void RenderOffenseMissle(std::shared_ptr<Missle> &offenseMissle);
   void RenderDefenseMissle(std::shared_ptr<Missle> &defenseMissle);
 
+  void DrawCircle(SDL_Renderer * renderer, int32_t centreX, int32_t centreY, int32_t radius);
+  
   SDL_Window *sdl_window;
   SDL_Renderer *sdl_renderer;
 

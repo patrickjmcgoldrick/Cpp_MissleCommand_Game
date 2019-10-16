@@ -63,20 +63,31 @@ Protect the cities.  When you 6 cities are gone, the game is over.
 * Functions and controll structures are there.
 * No External files read.
 * User input is taken from the mouse pointer to aim missles.
+* * src/control.cpp - line 7 'HandleInput' reads mouse clicks
 
 ### Object Oriented Programming
-* OO Techniques are used
+* All class data members are explicitly specified as public, protected, or private.
+* * see missle.h, all lines
+
 * Classes use accessor functions
 * Class constructors use Member initialization lists 
-* * Game.cpp Renderer.cpp Controler.cpp
+* * game.cpp, in constructor at lines 8-10
+* * renderer.cpp, in constructor at lines 8-11
+* * controler.cpp, lines 13-14
 * Details abstracted in classes
-* * Silo.cpp City.cpp Missle.cpp
+* * silo.cpp city.cpp missle.cpp
 * Encapsalation
-* * Silo.cpp City.cpp Missle.cpp
+* * silo.cpp city.cpp missle.cpp
+* One member function in an inherited class overrides a virtual base class member function.
+* * see missle.h base class with virtual function 'Update' at line 25.
+* * * offense_missle.h / .cpp at line 6 and 
+* * * defense_missle.h / .cpp at line 10, override 'Update' virtual function.
 
 ### Memory Management
 * Refernces are passed, specially vectors of shared_ptrs.
-* Uses shared_ptr for Vectors of Silo.cpp City.cpp Missle.cpp
+* * game.h Game::Run, line 55
+* Uses shared_ptr for Vectors of silo.cpp city.cpp missle.cpp
+* * game.h lines 41-45
 
 ### Concurrency
 * 

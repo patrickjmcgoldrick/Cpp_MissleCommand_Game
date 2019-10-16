@@ -36,14 +36,44 @@ Install sdl2_image.
 ## Basic Build Instructions
 
 1. Clone this repo.
-2. Make a build directory in the top level directory: `mkdir build && cd build`
-3. Compile: `cmake .. && make`
-4. Run it: `./MissleCommand`.
+2. Make sure you have libraries SDL2 and SDL2_Image installed.
+3. Make a build directory in the top level directory: `mkdir build && cd build`
+4. Compile: `cmake .. && make`
+5. Run it: `./MissleCommand`.
 
 
-## Icons Used
+## Code Write Up
 
-# Inital starter code from - CPPND: Capstone Snake Game Example
+### Compiling And Testing
+* The submission must compile and run.
+
+### Loops, Functions, I/0
+* Functions and controll structures are there.
+* No External files read.
+* User input is take from the mouse pointer to aim missles.
+
+### Object Oriented Programming
+* OO Techniques are used
+* Classes use accessor functions
+* Class constructors use Member initialization lists 
+* * Game.cpp Renderer.cpp Controler.cpp
+* Details abstracted in classes
+* * Silo.cpp City.cpp Missle.cpp
+* Encapsalation
+* * Silo.cpp City.cpp Missle.cpp
+
+### Memory Management
+* Refernces are passed, specially vectors of shared_ptrs.
+* Uses shared_ptr for Vectors of Silo.cpp City.cpp Missle.cpp
+
+### Concurrency
+* 
+
+
+
+
+
+## Inital starter code from - CPPND: Capstone Snake Game Example
 
 [repo](https://github.com/udacity/CppND-Capstone-Snake-Game)
 

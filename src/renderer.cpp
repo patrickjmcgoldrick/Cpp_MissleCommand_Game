@@ -160,8 +160,6 @@ void Renderer::RenderOffenseMissle(std::shared_ptr<OffenseMissle> &offenseMissle
 
 void Renderer::RenderDefenseMissle(std::shared_ptr<DefenseMissle> &defenseMissle) {
 
-  std::cout << "Rendering D Missle#" << defenseMissle->id << "\n";
-
   // set line color
   SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xFF, 0xFF, 0xFF);  //light blue
   

@@ -19,7 +19,7 @@ void Controller::HandleInput(bool &running, std::vector<std::shared_ptr<DefenseM
           std::cout << "Button RIGHT - at: " << e.button.x << ", " << e.button.y << std::endl;
           break;
         default:
-          std::cout << "Unknown Button - at: " << e.button.x << ", " << e.button.y << std::endl;
+          //std::cout << "Unknown Button - at: " << e.button.x << ", " << e.button.y << std::endl;
           float clickX = static_cast <float> (e.button.x);
           float clickY = static_cast <float> (e.button.y);
             

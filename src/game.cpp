@@ -7,7 +7,7 @@
 Game::Game(std::size_t game_width, std::size_t game_height)
     : engine(dev()),
       random_game_width(0, static_cast<int>(game_width)),
-      random_missle_count (0, static_cast<int>(4)) {
+      random_missle_count (0, static_cast<int>(10)) {
 
   
   // create ground objects
@@ -62,6 +62,12 @@ void Game::Run(Controller &controller, Renderer &renderer,
   bool running = true;
 
   while (running) {
+
+    // check for game over
+    if (cities.size() == 0) {
+      break;
+    }
+
     frame_start = SDL_GetTicks();
 
     // Input, Update, Render - the main game loop.
@@ -202,7 +208,6 @@ void Game::DefenseCleanup() {
         if (offMissle->getState() == MissleState::Falling) {
 
           if(defMissle->blastRadiusContains(offMissle)) {
-            //offMissle->setDestroyed(); //TODO done think we need this
             doneOffMissles.push(offIndex);
           }
         } 
@@ -219,6 +224,7 @@ void Game::DefenseCleanup() {
     int index = doneOffMissles.top();
     offenseMissles.erase(offenseMissles.begin() + index);
     doneOffMissles.pop();
+    score += 25;
   }
 
   // cleanup destroyed defense missles

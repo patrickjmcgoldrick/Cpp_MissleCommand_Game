@@ -44,13 +44,25 @@ Install sdl2_image.
 
 ## Code Write Up
 
+### README
+* Instructions, you are reading it.
+#### File Structure.  
+* subdirectory 'src' contains all .cpp and .h files.
+#### Gameplay: 
+* Click with the mouse to fire defensive missles at the incoming missles
+* Missles will fire from the surface and explode at the point you clicked.  If you can get the incoming missle into the explosion, it will destroy the incoming missle.
+* 25 points for every missle you destroy
+* in the long run, the game will have levels, you get a bonus at the end of every level for each city still standing and each missle not used.
+#### Goal: 
+Protect the cities.  When you 6 cities are gone, the game is over.
+
 ### Compiling And Testing
 * The submission must compile and run.
 
 ### Loops, Functions, I/0
 * Functions and controll structures are there.
 * No External files read.
-* User input is take from the mouse pointer to aim missles.
+* User input is taken from the mouse pointer to aim missles.
 
 ### Object Oriented Programming
 * OO Techniques are used

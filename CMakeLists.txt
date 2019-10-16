@@ -15,5 +15,5 @@ include_directories(${SDL2_INCLUDE_DIRS})
 include_directories(${SDL2_IMAGE_INCLUDE_DIRS})
 include_directories(src)
 
-add_executable(MissleCommand src/main.cpp src/game.cpp src/controller.cpp src/renderer.cpp src/missle.cpp src/silo.cpp src/city.cpp)
+add_executable(MissleCommand src/main.cpp src/game.cpp src/controller.cpp src/renderer.cpp src/missle.cpp src/offense_missle.cpp src/defense_missle.cpp src/silo.cpp src/city.cpp)
 target_link_libraries(MissleCommand ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})

@@ -143,11 +143,12 @@ void Renderer::RenderOffenseMissle(std::shared_ptr<OffenseMissle> &offenseMissle
 
   SDL_RenderDrawLine(sdl_renderer, startx, starty, px, py);
     
-  float radius = offenseMissle->getExplosionRadius();
 
   if (offenseMissle->getState() == MissleState::Exploding 
      || offenseMissle->getState() == MissleState::Imploding) {
     // draw explosion / implosion
+
+    float radius = offenseMissle->getExplosionRadius();
 
     // center explosion over hit point
     DrawCircle(sdl_renderer, px, py, radius);
@@ -159,6 +160,29 @@ void Renderer::RenderOffenseMissle(std::shared_ptr<OffenseMissle> &offenseMissle
 
 void Renderer::RenderDefenseMissle(std::shared_ptr<DefenseMissle> &defenseMissle) {
 
+  std::cout << "Rendering D Missle#" << defenseMissle->id << "\n";
+
+  // set line color
+  SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xFF, 0xFF, 0xFF);  //light blue
+  
+  float startx, starty, px, py;
+  defenseMissle->getMissleVector(startx, starty, px, py);
+ 
+  SDL_RenderDrawLine(sdl_renderer, startx, starty, px, py);
+    
+
+  if (defenseMissle->getState() == MissleState::Exploding 
+    || defenseMissle->getState() == MissleState::Imploding) {
+    // draw explosion / implosion
+
+    float radius = defenseMissle->getExplosionRadius();
+
+    // center explosion over hit point
+    DrawCircle(sdl_renderer, px, py, radius);
+    DrawCircle(sdl_renderer, px, py, (radius * 3.0 / 4.0));
+    DrawCircle(sdl_renderer, px, py, (radius / 2.0));
+    DrawCircle(sdl_renderer, px, py, (radius / 4));
+  }
 }
 
 /**

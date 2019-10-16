@@ -22,7 +22,11 @@ void Controller::HandleInput(bool &running, std::vector<std::shared_ptr<DefenseM
           std::cout << "Unknown Button - at: " << e.button.x << ", " << e.button.y << std::endl;
           float clickX = static_cast <float> (e.button.x);
           float clickY = static_cast <float> (e.button.y);
-          
+            
+          // create a defense missle, to explode at the clicked position
+          std::shared_ptr<DefenseMissle> missle = std::make_shared<DefenseMissle>();
+          missle->setMissleVector(595.0f, 620.0f, clickX, clickY);
+          defenseMissles.push_back(missle);
 
       } 
 

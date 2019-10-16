@@ -1,6 +1,7 @@
 #include "game.h"
 #include <iostream>
 #include <algorithm>
+#include <stack>
 #include "SDL.h"
 
 Game::Game(std::size_t game_width, std::size_t game_height)
@@ -104,8 +105,73 @@ void Game::Update() {
     missle->Update();
   });
 
-
+  // move defense missles
+  std::for_each(defenseMissles.begin(), defenseMissles.end(), [](std::shared_ptr<DefenseMissle> &missle) {
+    missle->Update();
+  });
   
+  std::stack<int> doneMissles;
+  std::stack<int> doneCities;
+  std::stack<int> doneSilos;
+
+  // compare done missles with terrain objects (silos and cities)
+  for (int i=0; i< offenseMissles.size(); i++) {
+    std::shared_ptr<OffenseMissle> missle = offenseMissles.at(i);
+    if (missle->getState() == MissleState::Done) {
+      // add to stack to be removed
+      doneMissles.push(i);
+
+      float mx, my;
+      missle->getPosition(mx, my);
+
+      // check if it hit a city
+      for (int ci=0; ci< cities.size(); ci++) {
+        std::shared_ptr<City> city = cities.at(ci);
+
+        float cx, cy, cw, ch;
+        city->getDimensions(cx, cy, cw, ch);
+
+        if (mx >= cx && mx <= (cx + cw)) {
+          // city was hit by this missle
+          doneCities.push(ci);
+        }
+      }
+
+      // check if it hit a silo
+      for (int si=0; si < silos.size(); si++) {
+        std::shared_ptr<Silo> silo = silos.at(si);
+
+        float sx, sy, sw, sh;
+        silo->getDimensions(sx, sy, sw, sh);
+
+        if (mx >= sx && mx <= (sx + sw)) {
+          // silo was hit by this missle
+          doneSilos.push(si);
+        }
+      }
+    }
+  }
+
+  // cleanup missles
+  while (!doneMissles.empty()) {
+    int index = doneMissles.top();
+    offenseMissles.erase(offenseMissles.begin() + index);
+    doneMissles.pop();
+  }
+
+  // clean cities
+  while (!doneCities.empty()) {
+    int index = doneCities.top();
+    cities.erase(cities.begin() +  + index);
+    doneCities.pop();
+  }
+
+  // clean silos
+  while (!doneSilos.empty()) {
+    int index = doneSilos.top();
+    silos.erase(silos.begin() + index);
+    doneSilos.pop();
+  }
 }
 
 int Game::GetScore() const { return score; }

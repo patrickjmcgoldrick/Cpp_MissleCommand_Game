@@ -39,3 +39,7 @@ void Missle::getMissleVector(float &startx, float &starty, float &posx, float &p
   posy = _posY;
 }
 
+void Missle::getPosition(float &px, float &py) {
+  px = _posX;
+  py = _posY;
+}

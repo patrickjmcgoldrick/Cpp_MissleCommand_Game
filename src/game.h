@@ -42,6 +42,8 @@ class Game {
   int score{0};
 
   void Update();
+
+  void OffenseCleanup();
 };
 
 #endif

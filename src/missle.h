@@ -20,6 +20,8 @@ class Missle {
 
     void getMissleVector(float &startx, float &starty, float &posx, float &posy);
     
+    void getPosition(float &x, float&y);
+    
     virtual void Update() = 0;  // it's important that the virtual function '= 0;'
                                 // won't compile otherwise.  Compiler thing.
 

@@ -21,7 +21,7 @@ class Missle {
     void getMissleVector(float &startx, float &starty, float &posx, float &posy);
     
     void getPosition(float &x, float&y);
-    
+
     virtual void Update() = 0;  // it's important that the virtual function '= 0;'
                                 // won't compile otherwise.  Compiler thing.
 
@@ -39,7 +39,7 @@ class Missle {
     
     MissleState _state = MissleState::Falling;
 
-  	float speed{1.5f};
+  	float _speed{1.0f};
 
     float _startX = 0.0f;
     float _startY = 0.0f;
@@ -50,10 +50,10 @@ class Missle {
     float _goalX = 0.0f;
     float _goalY = 0.0f;
     
-    float stepNumber = 0.0f;
-    float stepsToGoal = 0.0f;
+    float _stepNumber = 0.0f;
+    float _stepsToGoal = 0.0f;
 
-    float percentPerStep = 0.0f;
+    float _percentPerStep = 0.0f;
 
     float _dx = 0.0f;
     float _dy = 0.0f;

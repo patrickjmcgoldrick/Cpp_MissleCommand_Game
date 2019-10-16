@@ -24,8 +24,8 @@ void Missle::setMissleVector(float x, float y, float gx, float gy) {
 
   float length = sqrt((_dx * _dx) + (_dy * _dy));
 
-  percentPerStep = (float) speed / length;
-  stepsToGoal = (float) length / speed;
+  _percentPerStep = (float) _speed / length;
+  _stepsToGoal = (float) length / _speed;
 
 }
 

@@ -66,7 +66,11 @@ void Game::Run(Controller &controller, Renderer &renderer,
 
     // Input, Update, Render - the main game loop.
     controller.HandleInput(running, defenseMissles);
+
     Update();
+    OffenseCleanup();
+    DefenseCleanup();
+
     renderer.Render(cities, silos, offenseMissles, defenseMissles);
 
     frame_end = SDL_GetTicks();
@@ -110,6 +114,9 @@ void Game::Update() {
     missle->Update();
   });
   
+}
+
+void Game::OffenseCleanup() {
   std::stack<int> doneMissles;
   std::stack<int> doneCities;
   std::stack<int> doneSilos;
@@ -172,6 +179,55 @@ void Game::Update() {
     silos.erase(silos.begin() + index);
     doneSilos.pop();
   }
+}
+
+void Game::DefenseCleanup() {
+
+  std::stack<int> doneOffMissles;
+  std::stack<int> doneDefMissles;
+
+
+  // compare falling offense missles with exploding / imploding defense missles 
+  for (int defIndex=0; defIndex<defenseMissles.size(); defIndex++) {
+
+    std::shared_ptr<DefenseMissle> defMissle = defenseMissles.at(defIndex);
+
+    if (defMissle->getState() == MissleState::Exploding 
+      || defMissle->getState() == MissleState::Imploding) {
+
+      for (int offIndex=0; offIndex< offenseMissles.size(); offIndex++) {
+        
+        std::shared_ptr<OffenseMissle> offMissle = offenseMissles.at(offIndex);
+
+        if (offMissle->getState() == MissleState::Falling) {
+
+          if(defMissle->blastRadiusContains(offMissle)) {
+            //offMissle->setDestroyed(); //TODO done think we need this
+            doneOffMissles.push(offIndex);
+          }
+        } 
+
+      }
+    } else if (defMissle->getState() == MissleState::Done) {
+      doneDefMissles.push(defIndex);
+    }
+
+  } 
+
+  // cleanup destroyed offense missles
+  while (!doneOffMissles.empty()) {
+    int index = doneOffMissles.top();
+    offenseMissles.erase(offenseMissles.begin() + index);
+    doneOffMissles.pop();
+  }
+
+  // cleanup destroyed defense missles
+  while (!doneDefMissles.empty()) {
+    int index = doneDefMissles.top();
+    defenseMissles.erase(defenseMissles.begin() + index);
+    doneDefMissles.pop();
+  }
+
 }
 
 int Game::GetScore() const { return score; }

@@ -25,7 +25,17 @@ class Game {
 
 
  private:
+ 
+  // Update position of all objects for one time tick
+  void Update();
 
+  // Remove missles that are 'Done', Remove building destroyed
+  void OffenseCleanup();
+ 
+  // Removes offense missles that hit defense missle explosions
+  void DefenseCleanup();
+
+  // add one more offense missle
   void AddNewOffenseMissle();
 
   std::vector<std::shared_ptr<City>> cities; 
@@ -41,9 +51,7 @@ class Game {
 
   int score{0};
 
-  void Update();
 
-  void OffenseCleanup();
 };
 
 #endif

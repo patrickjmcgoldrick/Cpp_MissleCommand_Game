@@ -31,18 +31,18 @@ void OffenseMissle::Update() {
 
   } else if (_state == MissleState::Falling) {
   
-    stepNumber += 1;
+    _stepNumber += 1;
     
     // made it to the goal
-    if (stepNumber >= stepsToGoal) {
+    if (_stepNumber >= _stepsToGoal) {
 
       _posX = _goalX;
       _posY = _goalY;
       _state = MissleState::Exploding;
 
     } else {
-      _posX += percentPerStep * _dx;
-      _posY += percentPerStep * _dy; 
+      _posX += _percentPerStep * _dx;
+      _posY += _percentPerStep * _dy; 
 
     }
   }

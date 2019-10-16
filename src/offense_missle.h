@@ -6,6 +6,7 @@
 class OffenseMissle : public Missle {
   public:
     void Update();
+
 };
 
 #endif

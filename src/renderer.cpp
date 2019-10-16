@@ -44,8 +44,8 @@ Renderer::~Renderer() {
 
 void Renderer::Render(std::vector<std::shared_ptr<City>> &cities, 
                       std::vector<std::shared_ptr<Silo>> &silos,  
-                      std::vector<std::shared_ptr<Missle>> &offenseMissles,  
-                      std::vector<std::shared_ptr<Missle>> &defenseMissles) {
+                      std::vector<std::shared_ptr<OffenseMissle>> &offenseMissles,  
+                      std::vector<std::shared_ptr<DefenseMissle>> &defenseMissles) {
 
   SDL_Rect block;
   block.w = screen_width / grid_width;
@@ -76,12 +76,12 @@ void Renderer::Render(std::vector<std::shared_ptr<City>> &cities,
   });
   
   // render Offense Missles
-  std::for_each(offenseMissles.begin(), offenseMissles.end(), [&](std::shared_ptr<Missle> &offense) {
+  std::for_each(offenseMissles.begin(), offenseMissles.end(), [&](std::shared_ptr<OffenseMissle> &offense) {
     RenderOffenseMissle(offense);
   });
 
   // render Defensive Missles
-  std::for_each(defenseMissles.begin(), defenseMissles.end(), [&](std::shared_ptr<Missle> &defense) {
+  std::for_each(defenseMissles.begin(), defenseMissles.end(), [&](std::shared_ptr<DefenseMissle> &defense) {
     RenderDefenseMissle(defense);
   });
 
@@ -129,7 +129,7 @@ void Renderer::RenderSilo(std::shared_ptr<Silo> &silo) {
   
 }
 
-void Renderer::RenderOffenseMissle(std::shared_ptr<Missle> &offenseMissle) {
+void Renderer::RenderOffenseMissle(std::shared_ptr<OffenseMissle> &offenseMissle) {
 
   if (offenseMissle->getState() != MissleState::Falling) {
     SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);  //red
@@ -157,7 +157,7 @@ void Renderer::RenderOffenseMissle(std::shared_ptr<Missle> &offenseMissle) {
   }
 }
 
-void Renderer::RenderDefenseMissle(std::shared_ptr<Missle> &defenseMissle) {
+void Renderer::RenderDefenseMissle(std::shared_ptr<DefenseMissle> &defenseMissle) {
 
 }
 

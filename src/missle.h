@@ -9,6 +9,7 @@ enum MissleState {
 };
 
 class Missle {
+
   public:
 		
     Missle() {
@@ -19,7 +20,8 @@ class Missle {
 
     void getMissleVector(float &startx, float &starty, float &posx, float &posy);
     
-    void Update();
+    virtual void Update() = 0;  // it's important that the virtual function '= 0;'
+                                // won't compile otherwise.  Compiler thing.
 
     float getExplosionRadius() {
       return _explosionRadius;

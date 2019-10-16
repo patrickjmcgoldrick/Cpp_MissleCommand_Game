@@ -45,7 +45,7 @@ void Game::AddNewOffenseMissle() {
   float startx = (float)random_game_width(engine);  // random start
   float goalx = (float)random_game_width(engine);   // random target
 
-  std::shared_ptr<Missle> missle = std::make_shared<Missle>();
+  std::shared_ptr<OffenseMissle> missle = std::make_shared<OffenseMissle>();
   missle->setMissleVector(startx, 0.0f, goalx, 625.0f);
   offenseMissles.push_back(missle);
 
@@ -82,7 +82,6 @@ void Game::Run(Controller &controller, Renderer &renderer,
       title_timestamp = frame_end;
 
       int numNewMissles = random_missle_count(engine);
-      std::cout << "# Missles: " << numNewMissles << "\n";
       for (int i=0; i<numNewMissles; i++) {
         AddNewOffenseMissle();
       }
@@ -101,7 +100,7 @@ void Game::Run(Controller &controller, Renderer &renderer,
 void Game::Update() {
 
   // move offense missles
-  std::for_each(offenseMissles.begin(), offenseMissles.end(), [](std::shared_ptr<Missle> &missle) {
+  std::for_each(offenseMissles.begin(), offenseMissles.end(), [](std::shared_ptr<OffenseMissle> &missle) {
     missle->Update();
   });
 

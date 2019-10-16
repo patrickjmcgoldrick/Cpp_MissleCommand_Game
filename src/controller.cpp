@@ -4,7 +4,7 @@
 #include "SDL.h"
 
 
-void Controller::HandleInput(bool &running, std::vector<std::shared_ptr<Missle>> &defenseMissles) {
+void Controller::HandleInput(bool &running, std::vector<std::shared_ptr<DefenseMissle>> &defenseMissles) {
   SDL_Event e;
   while (SDL_PollEvent(&e)) {
     if (e.type == SDL_QUIT) {

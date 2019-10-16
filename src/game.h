@@ -9,7 +9,8 @@
 #include "renderer.h"
 #include "city.h"
 #include "silo.h"
-#include "missle.h"
+#include "offense_missle.h"
+#include "defense_missle.h"
 
 class Game {
  public:
@@ -30,8 +31,8 @@ class Game {
   std::vector<std::shared_ptr<City>> cities; 
   std::vector<std::shared_ptr<Silo>> silos;  
  
-  std::vector<std::shared_ptr<Missle>> offenseMissles;  
-  std::vector<std::shared_ptr<Missle>> defenseMissles;  
+  std::vector<std::shared_ptr<OffenseMissle>> offenseMissles;  
+  std::vector<std::shared_ptr<DefenseMissle>> defenseMissles;  
 
   std::random_device dev;
   std::mt19937 engine;

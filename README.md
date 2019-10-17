@@ -45,7 +45,16 @@ Install sdl2_image.
 ## Code Write Up
 
 ### README
-* Instructions, you are reading it.
+#### Instructions, how to play the game.
+##### Gameplay: 
+* The emeny is firing missles at your cities.  You must fire missles back to destroy them.
+* Click with the mouse to fire defensive missles at the incoming missles
+* Missles will fire from the surface and explode at the point you clicked.  If you can get the incoming missle into the explosion, it will destroy the incoming missle.
+* 25 points for every missle you destroy
+* In the long run, the game will have levels. Bonus points will be awarded at the end of every level, for each city still standing and each missle not used.
+##### Goal: 
+* Protect the cities.  When your 6 cities are gone, the game is over.
+
 #### File Structure.  
 * Subdirectory 'src' contains all .cpp and .h files.
 * game.cpp runs the game cycle. It's Run method:
@@ -53,13 +62,6 @@ Install sdl2_image.
 * * updates game elements, (game.cpp Update method calls Update on game objects)
 * * cleans up destroyed elements (game.cpp has two cleanup methods to wipe out destroyed objects)
 * * then renders the resulting object to the game screen (render.cpp draws objects)
-#### Gameplay: 
-* Click with the mouse to fire defensive missles at the incoming missles
-* Missles will fire from the surface and explode at the point you clicked.  If you can get the incoming missle into the explosion, it will destroy the incoming missle.
-* 25 points for every missle you destroy
-* In the long run, the game will have levels. Bonus points will be awarded at the end of every level, for each city still standing and each missle not used.
-#### Goal: 
-* Protect the cities.  When your 6 cities are gone, the game is over.
 
 ### Compiling And Testing
 * The submission must compile and run.

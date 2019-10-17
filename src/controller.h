@@ -13,7 +13,9 @@ class Controller {
   Controller(const std::size_t screen_width, const std::size_t screen_height) : screen_width(screen_width),
       screen_height(screen_height) {};
 
-  void HandleInput(bool &running, std::vector<std::shared_ptr<DefenseMissle>> &defenseMissles);
+  void HandleInput(bool &running, 
+                  std::vector<std::shared_ptr<Silo>> &silos,
+                  std::vector<std::shared_ptr<DefenseMissle>> &defenseMissles);
 
  private:
   

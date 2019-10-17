@@ -15,6 +15,7 @@ class Silo {
   
     // getters / setters
     void setPosition(float x, float y);
+    void getCenterX(float &x);
     void getDimensions(float &x, float &y, float &width, float &height);
 
   	void Update();

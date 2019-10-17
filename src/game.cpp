@@ -71,7 +71,7 @@ void Game::Run(Controller &controller, Renderer &renderer,
     frame_start = SDL_GetTicks();
 
     // Input, Update, Render - the main game loop.
-    controller.HandleInput(running, defenseMissles);
+    controller.HandleInput(running, silos, defenseMissles);
 
     Update();
     OffenseCleanup();

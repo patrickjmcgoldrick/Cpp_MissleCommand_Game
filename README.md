@@ -47,14 +47,19 @@ Install sdl2_image.
 ### README
 * Instructions, you are reading it.
 #### File Structure.  
-* subdirectory 'src' contains all .cpp and .h files.
+* Subdirectory 'src' contains all .cpp and .h files.
+* game.cpp runs the game cycle. It's Run method:
+* * takes User input, (controller.cpp)
+* * updates game elements, (game.cpp Update method calls Update on game objects)
+* * cleans up destroyed elements (game.cpp has two cleanup methods to wipe out destroyed objects)
+* * then renders the resulting object to the game screen (render.cpp draws objects)
 #### Gameplay: 
 * Click with the mouse to fire defensive missles at the incoming missles
 * Missles will fire from the surface and explode at the point you clicked.  If you can get the incoming missle into the explosion, it will destroy the incoming missle.
 * 25 points for every missle you destroy
-* in the long run, the game will have levels, you get a bonus at the end of every level for each city still standing and each missle not used.
+* In the long run, the game will have levels. Bonus points will be awarded at the end of every level, for each city still standing and each missle not used.
 #### Goal: 
-Protect the cities.  When you 6 cities are gone, the game is over.
+* Protect the cities.  When your 6 cities are gone, the game is over.
 
 ### Compiling And Testing
 * The submission must compile and run.
@@ -86,7 +91,7 @@ Protect the cities.  When you 6 cities are gone, the game is over.
 ### Memory Management
 * Refernces are passed, specially vectors of shared_ptrs.
 * * game.h Game::Run, line 55
-* Uses shared_ptr for Vectors of silo.cpp city.cpp missle.cpp
+* Uses shared_ptr for Vectors of silo.cpp, city.cpp, offense_missle.cpp, and defense_missle.cpp
 * * game.h lines 41-45
 
 ### Concurrency

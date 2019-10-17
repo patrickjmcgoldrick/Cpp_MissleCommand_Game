@@ -25,6 +25,12 @@ void Controller::HandleInput(bool &running,
           float clickX = static_cast <float> (e.button.x);
           float clickY = static_cast <float> (e.button.y);
 
+
+          // are there any Silos left if not, give up
+          if (silos.size() == 0) {
+            return;
+          }
+          
           // find nearest Silo
           float shortestDistance = 10000.0f;
           float siloPosX = 0.0f;; // big number TODO: make it max float
